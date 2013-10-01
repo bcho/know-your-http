@@ -7,29 +7,33 @@
 \usepackage{fontspec, xunicode}
 \usepackage[orientation=portrait,size=a1]{beamerposter}
 
+\usepackage{scrextend}
+\changefontsizes[20pt]{16pt}
+
 \definecolor{light-gray}{gray}{0.95}
 
-\setlength{\tabcolsep}{18pt}
+\setlength{\tabcolsep}{14pt}
 \renewcommand{\arraystretch}{1.1}
+\renewcommand{\baselinestretch}{1.25}
+\setlength{\parindent}{0em}
 
 \input{./footer.tex}
 
 \begin{document}
   \begin{frame}{}
 
+    \noindent
     \begin{minipage}{\textwidth}
       \centering
       \includegraphics[width=0.95\textwidth]{./title-status-codes.pdf}
     \end{minipage}
-
-    \vspace{0.5in}
 
     \begin{columns}
       \begin{column}{0.05\textwidth}
       \end{column}
       \begin{column}{0.9\textwidth}
         \begin{block}{}
-          \normalsize
+          \large
             服务器对每个请求都会回复相应的 HTTP 状态代码。这些代码包括 3 为数字
             和一段文字描述（只起提示作用，而且可能会被翻译成其他语言）。这些状态
             代码根据一般的错误原因进行分类；同一个分类下的状态代码的最高位都相同。
@@ -43,105 +47,105 @@
 
     \vspace{0.5in}
 
-    \begin{block}{\huge 1XX Informational}
+    \begin{block}{\huge 1XX 提示性}
 
       \vspace{0.3in}
 
       \rowcolors{3}{light-gray}{white}
       \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
-        Status Code & Description \\ \hline
-        100 Continue & The server has received the request headers, and the client should begin to send the request body \\
-        101 Switching Protocols & The server has received a request to switch protocols and is doing so \\
-        102 Processing (WebDAV) & Indicates that the server has received the request, used by WebDAV to avoid timeouts for long-running requests \\
+        状态代码 & 描述\\ \hline
+        100 Continue & 服务器已经接收到了请求头，客户端应该开始发送请求内容 \\
+        101 Switching Protocols & 服务器已经收到切换协议的请求并且在进行切换 \\
+        102 Processing (WebDAV) & 服务器已经收到请求。（在 WebDAV 中的长时间请求中使用以防止超时）\\
       \end{tabular}
     \end{block}
-    \begin{block}{\huge 2XX Success}
+    \begin{block}{\huge 2XX 成功}
 
       \vspace{0.3in}
 
       \rowcolors{3}{light-gray}{white}
       \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
-        Status Code & Description \\ \hline
-        200 OK & Standard response for successful HTTP requests \\
-        201 Created & The request was successful, \emph{and} a new resource has been created \\
-        202 Accepted & The request was accepted for processing, but the job hasn't actually been completed. It is possible that the request will be rejected once processing takes place \\
-        203 Non-Authoritative Information & The request was successfully processed, but the returned information may be from an untrusted third party \\
-        204 No Content & The request was processed and no content is being returned \\
-        206 Partial Content & Only part of the request body is being delivered (for example, when resuming an interrupted download) \\
-        207 Multi-Status (WebDAV) & The message body is an XML document and may contain multiple status codes per sub-requests \\
-        208 Already Reported (WebDAV) & The response has already been enumerated in a previous reply and will not be reported again\\
+        状态代码 & 描述 \\ \hline
+        200 OK & 对 HTTP 请求成功的标准回复 \\
+        201 Created & 请求成功\emph{并且}（在服务器端）建立了新的资源 \\
+        202 Accepted & 请求已经被接纳，但仍未处理完成。这个状态代码可能用在拒绝对已经开始处理的资源的请求上。\\
+        203 Non-Authoritative Information & 请求已经被成功处理，但返回的内容可能来自未被信任的第三方 \\
+        204 No Content & 请求已经被处理并且没有任何内容返回 \\
+        206 Partial Content & 只有一部分的内容被送出（可用在重新开始被中断的下载中）\\
+        207 Multi-Status (WebDAV) & 响应内容是 XML 文档并且可能对每个子请求包含不同的状态码 \\
+        208 Already Reported (WebDAV) & 响应内容已经在之前的响应中出现过了并且不会再次发出 \\
       \end{tabular}
     \end{block}
-    \begin{block}{\huge 3XX Redirection}
+    \begin{block}{\huge 3XX 重定向}
 
       \vspace{0.3in}
 
       \rowcolors{3}{light-gray}{white}
       \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
-        Status Code & Description \\ \hline
-        300 Multiple Choices & Indicates that there are multiple locations which the client may follow \\
-        301 Moved Permanently & The resource has moved permanently, and all future requests should use the give URL instead \\
-        302 Found & The resource has been found (or moved temporarily). The HTTP/1.0 specification requires that the redirect uses the same verb, but in practice clients use a GET as in a 303. See 303 and 307 \\
-        303 See Other & The resource has been found, and should be accessed using a GET method. Added in HTTP/1.1 to clarify the ambiguity in the behavior of status 302. See 302 and 307 \\
-        304 Not Modified & The resource has not been modified since the last time the client has cached it \\
-        305 Use Proxy & The resource should be accessed through a specified proxy \\
-        307 Temporary Redirect & The request should be repeated with the same request method at the given address. Added in HTTP/1.1 to clarify the ambiguity in the behavior of status 302. See 302 and 303
+        状态代码 & 描述 \\ \hline
+        300 Multiple Choices & 表明当前有多个目的地可供客户端前往 \\
+        301 Moved Permanently & 请求的资源已经被永久地转移到其他地方了，以后的请求都应该转向给出的地址 \\
+        302 Found & 已经找到资源（或者资源被临时转移到其他地方）。HTTP/1.0 中要求在该重定向中使用相同的请求方法；但实际上客户端会和 303 一样使用 GET 方法。见 303 和 307 \\
+        303 See Other & 已经找到资源而且需要使用 GET 来访问。该代码在 HTTP/1.1 中加入以区分 302 含糊的行为。见 302 和 307 \\
+        304 Not Modified & 资源和客户端上次缓存的一样 \\
+        305 Use Proxy & 资源需要通过特定代理才能进行访问 \\
+        307 Temporary Redirect & 需要对给定的地址使用相同的方法进行请求。该代码在 HTTP/1.1 中加入以区分 302 含糊的行为。见 302 和 303 \\
       \end{tabular}
     \end{block}
-    \begin{block}{\huge 4XX Client Error}
+    \begin{block}{\huge 4XX 客户端错误}
 
       \vspace{0.3in}
 
       \rowcolors{3}{light-gray}{white}
       \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
-        Status Code & Description \\ \hline
-        400 Bad Request & The request can not be fulfilled because the request contained bad syntax \\
-        401 Unauthorized & The client needs to authenticate in order to access this resource \\
-        402 Payment Required & This code is intended to be used for a micropayment system, but the specifics for this system are unspecified and this code is rarely used \\
-        403 Forbidden & The client is not allowed to access this resource. Generally, the client is authenticated and does not have sufficient permission \\
-        404 Not Found & The resource was not found, though its existence in the future is possible \\
-        405 Method Not Allowed & The method used in the request is not supported by the resource \\
-        406 Not Acceptable & The server can not generate content which is acceptable to the client according to the request's ``Accept'' header \\
-        407 Proxy Authentication Required & The client must authenticate with the proxy \\
-        408 Request Timeout & The client did not complete its request in a reasonable timeframe \\
-        409 Conflict & The request could not be completed due to a conflict in state (for example, attempting to update a resource when it has changed since last access) \\
-        410 Gone & The resource is gone, and will always be gone; the client should not request the resource again \\
-        411 Length Required & The request is missing its ``Content-Length'' header, which is required by this resource \\
-        412 Precondition Failed & The server can not meet preconditions specified in the client request \\
-        413 Request Entity Too Large & The request body is larger than the server will process \\
-        414 Request-URI Too Long & The request URI is too long for the server to process \\
-        415 Unsupported Media Type & The server can not process the request body because it is of an unsupported MIME type \\
-        416 Requested Range Not Satisfiable & The client has asked for portion of a file that the server can not supply (ie, a range of bytes outside the size of the requested file) \\
-        417 Expectation Failed & The server can not meet the requirements of the ``Expect'' header in the request \\
-        418 I'm a teapot (HTCPCP) & Returned by teapots implementing the HyperText Coffee Pot Control Protocol \\
-        420 Enhance Your Calm (Twitter) & The client is being rate-limited; a reference to cannabis culture \\
-        422 Unprocessable Entity (WebDAV) & The server can not process the request due to semantic errors \\
-        423 Locked (WebDAV) & The resource is currently locked \\
-        424 Failed Dependency (WebDAV) & The request failed because of a previously-failed request \\
-        429 Too Many Requests & The client is being rate-limited \\
-        431 Request Header Fields Too Large & Either a single request header is too large, or all the header fields as a group are too large \\
-        444 No Response (Nginx) & Used in Nginx logs. Indicates that the server closed the connection without sending any response whatsoever \\
-        449 Retry With (Microsoft) & The request should be retried after performing some action \\
-        450 Blocked by Windows Parental Controls (Microsoft) & Windows Parental Controls are turned on and are blocking access to the resource \\
-        451 Unavailable For Legal Reasons (Internet Draft) & Intended to be used when a resource is being censored or blocked; a reference to Fahrenheit 451 \\
+        状态代码 & 描述 \\ \hline
+        400 Bad Request & 请求中包含的语法错误导致请求不能被执行 \\
+        401 Unauthorized & 客户端需要进行验证后才能访问资源 \\
+        402 Payment Required & 这个状态代码计划用在微收费系统中，但是该系统的具体规范还没有制定出来；所以该代码很少用到 \\
+        403 Forbidden & 客户端不允许访问该资源。通常是因为客户端通过验证但没有足够权限来进行访问 \\
+        404 Not Found & 请求的资源没有找到，但有可能在未来出现 \\
+        405 Method Not Allowed & 请求资源的方法不被支持 \\
+        406 Not Acceptable & 服务器端不能以请求中的 ``Accept'' 头字段所指定的格式生成数据返回给客户端 \\
+        407 Proxy Authentication Required & 客户端必须通过代理的验证 \\
+        408 Request Timeout & 客户端没有在合理的时间里完成请求 \\
+        409 Conflict & 请求因为资源状态的冲突而不能被完成 （例如尝试去更新一个已经在上次请求后被修改过的资源） \\
+        410 Gone & 请求的资源已经永远地消失了，客户端不应该再去请求该资源 \\
+        411 Length Required & 请求头中缺少访问资源所需要的 ``Content-Length'' 字段 \\
+        412 Precondition Failed & 服务器不能满足客户端请求的前提条件 \\
+        413 Request Entity Too Large & 请求主体大小超过服务器端可以处理的大小 \\
+        414 Request-URI Too Long & 请求的资源地址太长 \\
+        415 Unsupported Media Type & 请求中包含服务器端不能处理的媒体类型（MIME） \\
+        416 Requested Range Not Satisfiable & 服务器端不能提供客户端请求的部分。（即有部分请求超出了所请求资源所包含的内容） \\
+        417 Expectation Failed & 服务器端不能满足请求头中 ``Expect'' 字段的要求 \\
+        418 I'm a teapot (HTCPCP) & 由实现了超文本咖啡壶控制协议的水壶所返回 \\
+        420 Enhance Your Calm (Twitter) & 客户端的请求超出了配额（来自大麻文化中的俚语） \\
+        422 Unprocessable Entity (WebDAV) & 由于语义上的错误导致请求不能被处理 \\
+        423 Locked (WebDAV) & 资源当前被锁定 \\
+        424 Failed Dependency (WebDAV) & 由于依赖的请求失败导致该请求失败 \\
+        429 Too Many Requests & 客户端的请求超出了配额 \\
+        431 Request Header Fields Too Large & 请求头中一个或全部字段的大小太大 \\
+        444 No Response (Nginx) & 表明服务器端会关闭连接但不返回任何响应。（在 Nginx logs 中使用） \\
+        449 Retry With (Microsoft) & 请求需要在执行某些操作后重新发起 \\
+        450 Blocked by Windows Parental Controls (Microsoft) & 由于 Windows 的家长控制已经打开，导致对资源的请求被屏蔽 \\
+        451 Unavailable For Legal Reasons (Internet Draft) & 打算用在描述被审查或被屏蔽的资源上。（来自小说 《华氏 451》）
       \end{tabular}
     \end{block}
-    \begin{block}{\huge 5XX Server Error}
+    \begin{block}{\huge 5XX 服务器端错误}
 
       \vspace{0.3in}
 
       \rowcolors{3}{light-gray}{white}
       \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
-        Status Code & Description \\ \hline
-        500 Internal Server Error & A generic server error message, for when no other more specific message is suitable \\
-        501 Not Implemented & The server can not process the request method \\
-        502 Bad Gateway & The server is a gateway or proxy, and received a bad response from the upstream server (such as a socket hangup) \\
-        503 Service Unavailable & The resource is temporarily unavailable, usually because it is overloaded or down for maintenance \\
-        504 Gateway Timeout & The server is a gateway or proxy, and the upstream server did not respond in a reasonable timeframe \\
-        505 HTTP Version Not Supported & The server does not support the request's specified HTTP version \\
-        507 Insufficient Storage (WebDAV) & The server is out of storage space and can not complete the request \\
-        508 Loop Detected (WebDAV) & The server has detected an infinite loop while processing the request \\
-        509 Bandwidth Limit Exceeded & A convention used to report that bandwidth limits have been exceeded, and not part of any RFC or spec \\
+        状态代码 & 描述 \\ \hline
+        500 Internal Server Error & 当没有更好的状态代码适合的时候，用来表明服务器端发生错误 \\
+        501 Not Implemented & 服务器端不能处理请求使用的方法 \\
+        502 Bad Gateway & 作为网关或者代理的服务器端从上游获得了一个错误的响应（例如套接字被关闭） \\
+        503 Service Unavailable & 资源暂时不能被访问，通常是因为该资源超载了或者需要下线维护 \\
+        504 Gateway Timeout & 作为网关或者代理的服务器端由于上游超时而不能处理请求 \\
+        505 HTTP Version Not Supported & 服务器端不支持请求使用的 HTTP 协议 \\
+        507 Insufficient Storage (WebDAV) & 服务器端没有足够的储存空间来完成请求 \\
+        508 Loop Detected (WebDAV) & 服务器端在处理请求的时候检测到死循环 \\
+        509 Bandwidth Limit Exceeded & 习惯上用作说明带宽超出配额，但该状态代码并没有在任何一份 RFC 中出现过 \\
       \end{tabular}
     \end{block}
   \end{frame}
