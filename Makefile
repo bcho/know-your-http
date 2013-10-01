@@ -1,4 +1,4 @@
-PDFS = headers.pdf methods.pdf status-codes.pdf
+PDFS = headers.pdf methods.pdf status-codes.pdf status-codes.zh-CN.pdf
 THUMBS = thumbnails/headers.png thumbnails/methods.png thumbnails/status-codes.png
 
 all: pdfs thumbs
@@ -21,8 +21,8 @@ clean:
 
 %.pdf: %.tex
 	@echo "# Generating $@ from $<..."
-	pdflatex -shell-escape -interaction=nonstopmode -halt-on-error $<
-	pdflatex -shell-escape -interaction=nonstopmode -halt-on-error $<
+	xelatex -shell-escape -interaction=nonstopmode -halt-on-error $<
+	xelatex -shell-escape -interaction=nonstopmode -halt-on-error $<
 
 thumbnails:
 	@mkdir -p thumbnails
