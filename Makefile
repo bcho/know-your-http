@@ -26,6 +26,7 @@ clean:
 %.pdf: %.tex
 	@echo "# Generating $@ from $<..."
 	xelatex -shell-escape -interaction=nonstopmode -halt-on-error $<
+	xelatex -shell-escape -interaction=nonstopmode -halt-on-error $<
 
 thumbnails:
 	@mkdir -p thumbnails
