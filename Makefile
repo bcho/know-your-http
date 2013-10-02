@@ -1,5 +1,5 @@
 PDFS = headers.pdf methods.pdf status-codes.pdf status-codes.zh-CN.pdf methods.zh-CN.pdf
-THUMBS = thumbnails/headers.png thumbnails/methods.png thumbnails/status-codes.png
+THUMBS = thumbnails/headers.png thumbnails/methods.png thumbnails/status-codes.png thumbnails/status-codes.zh-CN.png thumbnails/methods.zh-CN.png
 SCREENSHOTS = screenshots/status-codes.zh-CN.png screenshots/methods.zh-CN.png
 
 all: pdfs thumbs screens

@@ -18,6 +18,16 @@ You can take these to any print shop (such as Kinko's) and they will be well-equ
 
 [![](https://raw.github.com/bigcompany/know-your-http/master/thumbnails/status-codes.png)](https://github.com/jesusabdullah/know-your-http/blob/master/status-codes.pdf?raw=true)
 
+### [KNOW YOUR HTTP STATUS CODES! 中文](status-codes.zh-CN.pdf?raw=true)
+
+[![](thumbnails/status-codes.zh-CN.png)](status-codes.zh-CN.pdf?raw=true)
+
+
+### [KNOW YOUT HTTP METHODS! 中文](methods.zh-CN.pdf)
+
+[![](thumbnails/methods.zh-CN.png)](methods.zh-CN.pdf?raw=true)
+
+
 # For Sale
 
 You can now [buy these posters on Zazzle.com](http://www.zazzle.com/bigcompany/gifts?cg=196156583198150258)! Full disclosure: We make about $3.50 per poster.
