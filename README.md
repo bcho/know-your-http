@@ -51,6 +51,8 @@ In order for the build process to be successful, you will need the following:
 
 You can install [TeXLive](https://www.tug.org/texlive/) in Ubuntu by running `sudo apt-get install texlive`. Mac users may try [MacTeX](http://www.tug.org/mactex/), and the preferred distribution for Windows is [MikTeX](http://www.miktex.org/). If you don't have make, you should be able to compile it manually with the `pdflatex` command or similar means.
 
-## Licensing:
+## Licensing
 
 These posters are licensed [Creative Commons BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/) . The big.vc logo itself is copyright The Big Internet Company, all rights reserved, so please do not use it in derivative works.
+
+维生数工作室 logo 所有权归[维生数工作室](http://vtmer.com)所有。
