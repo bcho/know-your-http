@@ -1,0 +1,105 @@
+\documentclass[final,table]{beamer}
+
+\usecolortheme{dove}
+
+\usepackage{graphicx}
+\usepackage{ctex}
+\usepackage{fontspec, xunicode}
+\usepackage[orientation=landscape, size=a1]{beamerposter}
+
+\usepackage{scrextend}
+\changefontsizes[20pt]{16pt}
+
+\newcommand{\yes}{\color{green!60!black}{yes}}
+\newcommand{\no}{\color{red}{no}}
+\newcommand{\method}[1]{\textbf{#1}}
+\definecolor{light-gray}{gray}{0.95}
+
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.1}
+\renewcommand{\baselinestretch}{1.25}
+\setlength{\parindent}{0em}
+
+\input{./footer.tex}
+
+\begin{document}
+  \begin{frame}{}
+    \noindent
+    \begin{minipage}{\textwidth}
+      \centering
+      \includegraphics[]{./title-methods.pdf}
+    \end{minipage}
+    
+    \vspace{0.5in}
+
+    \begin{columns}
+      \begin{column}{0.1\textwidth}
+      \end{column}
+      \begin{column}{0.8\textwidth}
+        \begin{block}{}
+          \huge
+          HTTP 请求方法，也叫请求动作，是用来说明对\emph{资源}（由统一资源标志符 URI 指向）
+          使用的\emph{操作方法}。但实际上资源用什么方式来呈现以及被操作是由服务器端
+          的程序来决定的。
+          \normalsize
+        \end{block}
+      \end{column}
+      \begin{column}{0.1\textwidth}
+      \end{column}
+    \end{columns}
+
+    \vspace{0.5in}
+
+    \begin{columns}
+      \begin{column}{0.05\textwidth}
+      \end{column}
+      \begin{column}{0.9\textwidth}
+        \begin{block}{}
+          \Huge
+          \rowcolors{3}{light-gray}{white}
+          \begin{tabular}{r p{0.62\textwidth} l l l}
+            请求方法 & 描述 & 安全? & 幂等? & 定义协议\\ \hline
+            \method{GET} & 获取资源 & \yes & \yes & HTTP 1.0 \\
+            \method{HEAD} & 获取资源，但只需要头部信息（资源的元信息） & \yes & \yes &HTTP 1.0 \\
+            \method{POST} & 根据请求主体来处理资源 & \no & \no & HTTP 1.0 \\
+            \method{PUT} & 根据请求主体的内容来创建或更新资源 & \no & \yes & HTTP 1.1 \\
+            \method{DELETE} & 删除指定的资源 & \yes & \yes & HTTP 1.1 \\
+            \method{OPTIONS} & 请求服务器端返回资源支持的请求方法 & \yes & \yes & HTTP 1.1 \\
+            \method{TRACE} & 回显服务器收到的请求（主要用在测试或诊断） & \yes & \yes & HTTP 1.1 \\
+            \method{CONNECT} & 将连接转换成管道方式（通常用在经由非加密的 HTTP 代理连接到 SSL 加密服务器端上） & --- & --- & HTTP 1.1 \\
+            \method{PATCH} & 对资源进行部分修改 & \no & \yes & RFC-5789 \\
+          \end{tabular}
+        \end{block}
+
+        \vspace{0.5in}
+
+        \begin{columns}
+          \begin{column}{0.3\textwidth}
+            \begin{block}{\huge{安全的请求方法}}
+              \Large
+              那些被称作\emph{安全}的请求方法是指该请求不会对资源进行修改或者不会为
+              服务器端整体的状态带来任何副作用。不安全的方法可能会产生副作用，例如：
+              对资源进行修改，发出一封邮件或者初始化对信用卡的处理。
+            \end{block}
+          \end{column}
+          \begin{column}{0.62\textwidth}
+            \begin{block}{\huge{幂等的请求方法}}
+              \Large
+              一些请求方法是\emph{幂等}的，是指对指定的资源进行同样的操作任意多次
+              都会产生同样的结果。例如 DELETE 请求就是幂等的，因为一个资源被删除之后，
+              它将不能被再次删除。相反的， POST 请求是非幂等的，因为当你再次发出
+              同样的请求后，服务器端可能会发出第二封相同的邮件或者对同一张信用卡
+              再进行一次处理。
+
+              由以上的定义我们可以知道，\emph{安全}的请求方法都是\emph{幂等}的。
+            \end{block}
+          \end{column}
+        \end{columns}
+
+      \end{column}
+      \begin{column}{0.05\textwidth}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+\end{document}
